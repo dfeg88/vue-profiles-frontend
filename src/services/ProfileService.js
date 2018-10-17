@@ -6,5 +6,14 @@ export default {
   },
   getAll () {
       return Api().get('profiles')
+  },
+  delete (profileId) {
+    return Api().delete(`profile/${profileId}`)
+  },
+  get (id) {
+    return Api().get(`profile/${id}`)
+  },
+  update (profile) {
+    return Api().put('profile', profile)
   }
 }

@@ -102,6 +102,9 @@ export default {
       async create() {
           try {
               await ProfileService.post(this.profile)
+              this.$router.push({
+                  name: 'profiles'
+              })
           } catch (err) {
               console.log(err)
           }
