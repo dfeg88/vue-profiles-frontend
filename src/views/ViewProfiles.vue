@@ -1,5 +1,15 @@
 <template>
   <v-layout row wrap>
+    <v-container v-if="profiles.length === 0" justify-center>
+      <v-flex xs12 md8 align-center>
+        <strong>It seems as though no profiles exist...</strong><br><br>
+        <v-btn
+          color="success"
+          :to="{name: 'create'}">
+        Create Profile
+        </v-btn>
+      </v-flex>
+    </v-container>
     <v-flex
       xs12 sm6 md4 lg3
       v-for="(profile, i) in profiles"
