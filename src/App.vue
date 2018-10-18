@@ -29,6 +29,7 @@
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
+      <v-divider></v-divider>
       <sidenav-options/>
     </v-navigation-drawer>
     <v-content>
@@ -46,8 +47,8 @@ export default {
   data () {
     return {
       items: [{
-        icon: 'expand_more',
-        title: 'Profile Menu'
+        icon: 'sentiment_very_dissatisfied',
+        title: 'Menu'
       }]
     }
   }

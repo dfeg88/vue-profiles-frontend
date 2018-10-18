@@ -6,7 +6,7 @@ import Vuetify from 'vuetify'
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import SidenavOptions from '@/components/SidenavOptions'
+import SidenavOptions from '@/components/navigation/SidenavOptions'
 
 Vue.config.productionTip = false;
 Vue.use(Vuetify)

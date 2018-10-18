@@ -1,6 +1,6 @@
 <template>
   <v-layout row wrap>
-    <v-container v-if="profiles.length === 0" justify-center>
+    <v-container v-if="profiles.length === 0 && !loading" justify-center>
       <v-flex xs12 md8 align-center>
         <strong>It seems as though no profiles exist...</strong><br><br>
         <v-btn
@@ -16,7 +16,7 @@
       :key="i">
       <v-card :class="{'ma-3': $vuetify.breakpoint.smAndDown, 'ma-3': $vuetify.breakpoint.mdAndUp}">
         <v-img
-          src="https://iphonewalls.net/wp-content/uploads/2015/01/Cute%20Santa%20Claus%20Minimal%20Illustration%20iPhone%206%20Plus%20HD%20Wallpaper-320x480.jpg"
+          :src="tempImageUrl"
           gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
           height="200px">
           <v-container
@@ -110,12 +110,15 @@ import ProfileService from "@/services/ProfileService";
 export default {
   data() {
     return {
+      loading: true,
       dialog: {},
-      profiles: null
+      profiles: [],
+      tempImageUrl: "https://iphonewalls.net/wp-content/uploads/2015/01/Cute%20Santa%20Claus%20Minimal%20Illustration%20iPhone%206%20Plus%20HD%20Wallpaper-320x480.jpg"
     };
   },
   async mounted() {
     this.profiles = (await ProfileService.getAll()).data;
+    this.loading = false;
   },
   methods: {
     async deleteProfile(profile) {
