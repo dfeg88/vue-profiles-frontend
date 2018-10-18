@@ -46,8 +46,8 @@ export default {
   data () {
     return {
       items: [{
-        icon: 'bubble_chart',
-        title: 'Profile Options'
+        icon: 'expand_more',
+        title: 'Profile Menu'
       }]
     }
   }

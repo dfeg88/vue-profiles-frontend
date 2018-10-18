@@ -1,65 +1,122 @@
 <template>
     <v-layout justify-center>
-        <v-flex lg6>
-            <div>
-                <v-form v-model="valid">
-                    <v-text-field
-                        v-model="profile.customer.firstName"
-                        :rules="rules.firstNameRules"
-                        label="First Name"
-                        required>
-                    </v-text-field>
-                    <v-text-field
-                        v-model="profile.customer.lastName"
-                        :rules="rules.lastNameRules"
-                        label="Last Name"
-                        required>
-                    </v-text-field>
-                    <v-text-field
-                        v-model="profile.address.houseNumber"
-                        label="House Number">
-                    </v-text-field>
-                    <v-text-field
-                        v-model="profile.address.street"
-                        label="Street">
-                    </v-text-field>
-                    <v-text-field
-                        v-model="profile.address.town"
-                        label="Town">
-                    </v-text-field>
-                    <v-text-field
-                        v-model="profile.address.city"
-                        label="City">
-                    </v-text-field>
-                    <v-text-field
-                        v-model="profile.address.postcode"
-                        label="Postcode">
-                    </v-text-field>
-                    <v-text-field
-                        v-model="profile.car.registrationNumber"
-                        label="Car Reg">
-                    </v-text-field>
-                    <v-text-field
-                        v-model="profile.car.make"
-                        label="Car Make">
-                    </v-text-field>
-                    <v-text-field
-                        v-model="profile.car.model"
-                        label="Car Model">
-                    </v-text-field>
-                    <v-text-field
-                        type="number"
-                        v-model="profile.car.engineSize"
-                        label="Engine Size">
-                    </v-text-field>
-                </v-form>
-            </div>
-            <v-btn
-                :disabled="!isComplete"
-                dark
-                @click="create">
-                Create Profile
-            </v-btn>
+        <v-flex xs12>              
+          <v-form v-model="valid" class="pa-5" id="create-form">
+          <v-stepper v-model="e1">
+            <v-toolbar dark class="primary">
+              <v-toolbar-title>{{title}}</v-toolbar-title>
+            </v-toolbar>
+            <v-stepper-header>
+              <v-stepper-step :complete="e1 > 1" step="1">Name</v-stepper-step>
+              <v-divider></v-divider>
+              <v-stepper-step :complete="e1 > 2" step="2">Address</v-stepper-step>
+              <v-divider></v-divider>
+              <v-stepper-step step="3">Car Details</v-stepper-step>
+            </v-stepper-header>
+
+            <v-stepper-items>
+              <v-stepper-content step="1">
+                <v-text-field
+                  v-model="profile.customer.firstName"
+                  :rules="rules.firstNameRules"
+                  label="First Name"
+                  required>
+                </v-text-field>
+                <v-text-field
+                    v-model="profile.customer.lastName"
+                    :rules="rules.lastNameRules"
+                    label="Last Name"
+                    required>
+                </v-text-field>
+                <v-btn
+                  class="mt-3"
+                  :disabled='!isComplete'
+                  color="primary"
+                  @click="e1 = 2"
+                >
+                  Next
+                </v-btn>
+              </v-stepper-content>
+              <v-stepper-content step="2">
+                <v-text-field
+                  v-model="profile.address.houseNumber"
+                  label="House Number"
+                  required
+                  :rules="rules.rule">
+                </v-text-field>
+                <v-text-field
+                    v-model="profile.address.street"
+                    label="Street"
+                    required
+                    :rules="rules.rule">
+                </v-text-field>
+                <v-text-field
+                    v-model="profile.address.town"
+                    label="Town"
+                    required
+                    :rules="rules.rule">
+                </v-text-field>
+                <v-text-field
+                    v-model="profile.address.city"
+                    label="City"
+                    required
+                    :rules="rules.rule">
+                </v-text-field>
+                <v-text-field
+                    v-model="profile.address.postcode"
+                    label="Postcode"
+                    required
+                    :rules="rules.rule">
+                </v-text-field>
+                <v-btn
+                  class="mt-3"
+                  :disabled="!isAddressComplete"
+                  color="primary"
+                  @click="e1 = 3"
+                >
+                  Next
+                </v-btn>
+                <v-btn flat @click="back" class="mt-3">Back</v-btn>
+              </v-stepper-content>
+              <v-stepper-content step="3">
+                <v-text-field
+                  v-model="profile.car.registrationNumber"
+                  label="Car Reg"
+                  required
+                  :rules="rules.rule">
+                </v-text-field>
+                <v-text-field
+                    v-model="profile.car.make"
+                    label="Car Make"
+                    required
+                    :rules="rules.rule">
+                </v-text-field>
+                <v-text-field
+                    v-model="profile.car.model"
+                    label="Car Model"
+                    required
+                    :rules="rules.rule">
+                </v-text-field>
+                <v-text-field
+                    type="number"
+                    v-model="profile.car.engineSize"
+                    label="Engine Size"
+                    required
+                    :rules="rules.rule">
+                </v-text-field>
+                <v-btn
+                  :disabled="!isCarDetailsComplete"
+                  class="mt-3"
+                  color="primary"
+                  @click="create"
+                >
+                  Create Profile
+                </v-btn>
+                <v-btn flat @click="back" class="mt-3">Back</v-btn>
+              </v-stepper-content>
+            </v-stepper-items>
+          </v-stepper> 
+        </v-form>
         </v-flex>
     </v-layout>    
 </template>
@@ -68,6 +125,8 @@
 import ProfileService from '@/services/ProfileService'
 export default {
   data: () => ({
+    e1: 0,
+    title: 'Create Profile',
     valid: false,
     profile: {
       customer: {
@@ -90,12 +149,26 @@ export default {
     },
     rules: {
       firstNameRules: [v => !!v || "First name is required"],
-      lastNameRules: [v => !!v || "Last name is required"]
+      lastNameRules: [v => !!v || "Last name is required"],
+      rule: [v => !!v || "Field required"]
     }
   }),
   computed: {
       isComplete() {
-          return this.profile.customer.firstName && this.profile.customer.lastName
+        return this.profile.customer.firstName && this.profile.customer.lastName
+      },
+      isAddressComplete() {
+        return this.profile.address.houseNumber
+          && this.profile.address.street
+          && this.profile.address.town
+          && this.profile.address.city
+          && this.profile.address.postcode
+      },
+      isCarDetailsComplete() {
+        return this.profile.car.registrationNumber
+          && this.profile.car.make
+          && this.profile.car.model
+          && this.profile.car.engineSize
       }
   },
   methods: {
@@ -108,6 +181,9 @@ export default {
           } catch (err) {
               console.log(err)
           }
+      },
+      back () {
+        this.e1--
       }
   }
 };
