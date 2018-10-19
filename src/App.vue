@@ -46,4 +46,14 @@ export default {
     text-decoration: none;
     color: #fff;
   }
+
+  footer {
+    display: block;
+    padding: 1em;
+  }
+
+  span {
+    display: block;
+    text-align: center;
+  }
 </style>
