@@ -66,6 +66,8 @@
 </template>
 
 <script>
+import ProfileService from "@/services/ProfileService";
+
 export default {
   props: [
     'profile'
@@ -74,6 +76,15 @@ export default {
     return {
       loading: true,
       dialog: {},
+    }
+  },
+  methods: {
+    async update(profile) {
+      try {
+        await ProfileService.update(profile)
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 }
