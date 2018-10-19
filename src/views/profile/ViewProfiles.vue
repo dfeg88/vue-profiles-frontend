@@ -47,7 +47,6 @@ export default {
   data() {
     return {
       loading: true,
-      dialog: {},
       profiles: [],
       tempImageUrl: "https://iphonewalls.net/wp-content/uploads/2015/01/Cute%20Santa%20Claus%20Minimal%20Illustration%20iPhone%206%20Plus%20HD%20Wallpaper-320x480.jpg"
     };
