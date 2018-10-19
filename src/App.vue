@@ -34,11 +34,7 @@ export default {
   name: 'App',
   data () {
     return {
-      drawer: true,
-      items: [{
-        icon: 'sentiment_very_dissatisfied',
-        title: 'Menu'
-      }]
+      drawer: true
     }
   }
 }
