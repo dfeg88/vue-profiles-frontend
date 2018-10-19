@@ -24,7 +24,7 @@
       <router-view/>
     </v-content>
     <v-footer app>
-      <span>&copy; 2018</span>
+      <span>&copy; {{year}}</span>
     </v-footer>
   </v-app>
 </template>
@@ -34,6 +34,7 @@ export default {
   name: 'App',
   data () {
     return {
+      year: new Date().getFullYear(),
       drawer: true
     }
   }
