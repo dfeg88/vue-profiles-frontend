@@ -2,7 +2,7 @@
   <div v-if="healthStatus">
     <v-layout ma-5 row fill-height>
       <v-flex xs12 md6 lg6>
-        <v-toolbar dark class="primary">
+        <v-toolbar dark color="grey darken-2">
           <v-toolbar-title>{{title}}</v-toolbar-title>
         </v-toolbar>
         <v-responsive class="white elevation-6 px-3 pt-3 pb-3">

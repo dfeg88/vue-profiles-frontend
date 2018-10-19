@@ -3,7 +3,7 @@
         <v-flex xs12>              
           <v-form v-model="valid" class="pa-5" id="create-form">
           <v-stepper v-model="e1">
-            <v-toolbar dark class="primary">
+            <v-toolbar dark color="grey darken-2">
               <v-toolbar-title>{{title}}</v-toolbar-title>
             </v-toolbar>
             <v-stepper-header>
