@@ -1,5 +1,5 @@
 <template>
-  <v-layout mt-5 ml-5 row fill-height>
+  <v-layout ma-5 row fill-height>
     <v-flex xs12 md6 lg6>
       <v-toolbar dark class="primary">
         <v-toolbar-title>{{title}}</v-toolbar-title>

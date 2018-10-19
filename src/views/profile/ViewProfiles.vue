@@ -12,6 +12,7 @@
     </v-container>
     <v-flex
       xs12 sm6 md4 lg3
+      pa-2
       v-for="(profile, i) in profiles"
       :key="i">
       <v-card :class="{'ma-3': $vuetify.breakpoint.smAndDown, 'ma-3': $vuetify.breakpoint.mdAndUp}" class="elevation-8">
