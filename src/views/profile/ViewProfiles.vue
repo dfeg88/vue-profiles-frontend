@@ -33,9 +33,7 @@
         </v-img>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn icon @click="deleteProfile(profile)">
-            <v-icon color="red darken-3">delete</v-icon>
-          </v-btn>
+          <delete-profile :profile=profile :profiles=profiles></delete-profile>
           <edit-profile :profile=profile></edit-profile>
         </v-card-actions>
       </v-card>
@@ -57,29 +55,6 @@ export default {
   async mounted() {
     this.profiles = (await ProfileService.getAll()).data;
     this.loading = false;
-  },
-  methods: {
-    async deleteProfile(profile) {
-      try {
-        const confirmMessage = confirm(
-          `Are you sure you want to delete the profile: ${profile.customer.firstName} ${profile.customer.lastName}?`
-        );
-        if (confirmMessage) {
-          await ProfileService.delete(profile.id);
-          const index = this.profiles.indexOf(profile);
-          this.profiles.splice(index, 1);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    },
-    async update(profile) {
-      try {
-        await ProfileService.update(profile)
-      } catch (err) {
-        console.log(err)
-      }
-    }
   }
 };
 </script>
