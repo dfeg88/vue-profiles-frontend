@@ -7,11 +7,13 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import SidenavOptions from '@/components/navigation/SidenavOptions'
+import EditProfile from '@/components/profile/EditProfile'
 
 Vue.config.productionTip = false;
 Vue.use(Vuetify)
 Vue.use(VeeValidate)
 Vue.component('sidenav-options', SidenavOptions)
+Vue.component('edit-profile', EditProfile)
 
 new Vue({
   router,
