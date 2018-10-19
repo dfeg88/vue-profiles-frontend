@@ -5,23 +5,29 @@
         <v-toolbar-title>{{title}}</v-toolbar-title>
       </v-toolbar>
       <v-responsive class="white elevation-6 px-3 pt-3 pb-3">
-        <strong class="pa-3">Health Check Status:</strong><strong class="green--text">{{healthStatus.status}}</strong>
+        <strong class="pa-2">Local Time: {{times.localTime}}</strong>
+        <br>
+        <strong class="pa-2">Time in Canada: {{times.canadaTime}}</strong>
       </v-responsive>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-import HealthCheckService from '@/services/HealthCheckService'
+import TimesService from '@/services/TimesService'
 export default {
   data() {
     return {
-      title: "Health Check",
-      healthStatus: null
+      title:  'Current Times',
+      times: ''
     }
   },
   async mounted() {
-    this.healthStatus = (await HealthCheckService.get()).data;
+    try {
+      this.times = (await TimesService.getTimes()).data;
+    } catch (err) {
+      console.log(err)
+    }
   }
 }
 </script>
