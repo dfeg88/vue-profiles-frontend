@@ -30,8 +30,13 @@ export default {
     }
   },
   async mounted() {
-    this.healthStatus = (await HealthCheckService.get()).data;
-    this.loading = false
+    try {
+      this.healthStatus = (await HealthCheckService.get()).data;
+      this.loading = false
+    } catch (err) {
+      this.loading = false
+      console.log(err)
+    }
   }
 }
 </script>

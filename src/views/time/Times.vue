@@ -8,7 +8,7 @@
           <strong class="red--text">Server currently unavailable</strong>
         </v-responsive>
       </v-flex>
-      
+
       <v-flex xs12 md6 lg6 v-if="times">
         <v-toolbar dark color="grey darken-2">
           <v-toolbar-title>{{title}}</v-toolbar-title>
@@ -38,6 +38,7 @@ export default {
       this.loading = false
     } catch (err) {
       console.log(err)
+      this.loading = false
     }
   }
 }
