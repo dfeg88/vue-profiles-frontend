@@ -21,11 +21,25 @@
       </v-toolbar-title>
     </v-toolbar>
     <v-content>
-      <router-view/>
+      <router-view></router-view>
     </v-content>
     <v-footer app>
       <span>&copy; {{year}}</span>
     </v-footer>
+    <v-snackbar
+      v-model="snackbar"
+      :color="color"
+      :multi-line="mode === 'multi-line'"
+      :timeout="timeout"
+      :vertical="mode === 'vertical'">
+      {{snackbarTitle}}
+      <v-btn
+        dark
+        flat
+        @click="snackbar = false">
+        Close
+      </v-btn>
+    </v-snackbar>
   </v-app>
 </template>
 
@@ -34,9 +48,21 @@ export default {
   name: 'App',
   data () {
     return {
+      snackbar: false,
+      snackbarTitle: '',
+      color: '',
+      mode: '',
+      timeout: 6000,
       year: new Date().getFullYear(),
       drawer: true
     }
+  },
+  mounted() {
+    this.$root.$on('initSnackBar', (obj) => {
+      this.snackbarTitle = obj.text;
+      this.color = obj.color
+      this.snackbar = true;
+    });
   }
 }
 </script>

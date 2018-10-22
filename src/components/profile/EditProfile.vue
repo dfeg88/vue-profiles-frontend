@@ -84,6 +84,11 @@ export default {
         await ProfileService.update(profile)
       } catch (err) {
         console.log(err)
+      } finally {
+        this.$root.$emit('initSnackBar', {
+          text: 'Profile Updated',
+          color: 'info'
+        })
       }
     }
   }

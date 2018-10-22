@@ -117,7 +117,7 @@
             </v-stepper-items>
           </v-stepper> 
         </v-form>
-        </v-flex>
+      </v-flex>
     </v-layout>    
 </template>
 
@@ -175,11 +175,16 @@ export default {
       async create() {
           try {
               await ProfileService.post(this.profile)
-              this.$router.push({
-                  name: 'profiles'
-              })
           } catch (err) {
               console.log(err)
+          } finally {
+            this.$root.$emit('initSnackBar', {
+              text: 'Profile Created Successfully',
+              color: 'success'
+            })
+            this.$router.push({
+                name: 'profiles'
+            })
           }
       },
       back () {

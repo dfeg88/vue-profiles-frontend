@@ -46,6 +46,11 @@ export default {
           this.profiles.splice(index, 1);
       } catch (err) {
         console.log(err);
+      } finally {
+        this.$root.$emit('initSnackBar', {
+          text: 'Profile Deleted',
+          color: 'red'
+        })
       }
     }
   }
