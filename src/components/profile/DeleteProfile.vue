@@ -44,11 +44,15 @@ export default {
           await ProfileService.delete(profile.id);
           const index = this.profiles.indexOf(profile);
           this.profiles.splice(index, 1);
+
+          this.$root.$emit('initSnackBar', {
+          text: 'Profile Deleted',
+          color: 'red'
+        })
       } catch (err) {
         console.log(err);
-      } finally {
         this.$root.$emit('initSnackBar', {
-          text: 'Profile Deleted',
+          text: 'Something went wrong',
           color: 'red'
         })
       }

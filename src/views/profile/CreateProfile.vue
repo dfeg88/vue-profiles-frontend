@@ -174,10 +174,8 @@ export default {
   methods: {
       async create() {
           try {
-              await ProfileService.post(this.profile)
-          } catch (err) {
-              console.log(err)
-          } finally {
+            await ProfileService.post(this.profile)
+
             this.$root.$emit('initSnackBar', {
               text: 'Profile Created Successfully',
               color: 'success'
@@ -185,6 +183,12 @@ export default {
             this.$router.push({
                 name: 'profiles'
             })
+          } catch (err) {
+            this.$root.$emit('initSnackBar', {
+              text: 'Something went wrong',
+              color: 'red'
+            })
+            console.log(err)
           }
       },
       back () {

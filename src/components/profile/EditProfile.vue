@@ -82,13 +82,18 @@ export default {
     async update(profile) {
       try {
         await ProfileService.update(profile)
-      } catch (err) {
-        console.log(err)
-      } finally {
+
         this.$root.$emit('initSnackBar', {
           text: 'Profile Updated',
           color: 'info'
         })
+      } catch (err) {
+        this.$root.$emit('initSnackBar', {
+          text: 'Something went wrong',
+          color: 'alert'
+        })
+        
+        console.log(err)
       }
     }
   }
