@@ -1,7 +1,14 @@
 <template>
-  <div v-if="healthStatus">
     <v-layout ma-5 row fill-height>
-      <v-flex xs12 md6 lg6>
+      <v-flex xs12 md6 lg6 v-if="!healthStatus && !loading">
+        <v-toolbar dark color="grey darken-2">
+          <v-toolbar-title>{{title}}</v-toolbar-title>
+        </v-toolbar>
+        <v-responsive class="white elevation-6 px-3 pt-3 pb-3">
+          <strong class="pa-3">Health Check Status:</strong><strong class="red--text">Server currently unavailable</strong>
+        </v-responsive>
+      </v-flex>
+      <v-flex xs12 md6 lg6 v-if="healthStatus">
         <v-toolbar dark color="grey darken-2">
           <v-toolbar-title>{{title}}</v-toolbar-title>
         </v-toolbar>
@@ -10,19 +17,6 @@
         </v-responsive>
       </v-flex>
     </v-layout>
-  </div>
-  <div v-else>
-    <v-layout ma-5 row fill-height>
-      <v-flex xs12 md6 lg6>
-        <v-toolbar dark color="grey darken-2">
-          <v-toolbar-title>{{title}}</v-toolbar-title>
-        </v-toolbar>
-        <v-responsive class="white elevation-6 px-3 pt-3 pb-3">
-          <strong class="pa-3">Health Check Status:</strong><strong class="red--text">Server currently unavailable</strong>
-        </v-responsive>
-      </v-flex>
-    </v-layout>
-  </div>
 </template>
 
 <script>
@@ -31,11 +25,13 @@ export default {
   data() {
     return {
       title: "Health Check",
-      healthStatus: null
+      healthStatus: null,
+      loading: true
     }
   },
   async mounted() {
     this.healthStatus = (await HealthCheckService.get()).data;
+    this.loading = false
   }
 }
 </script>
