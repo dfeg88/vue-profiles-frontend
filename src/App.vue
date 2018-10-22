@@ -29,9 +29,10 @@
     <v-snackbar
       v-model="snackbar"
       :color="color"
-      :multi-line="mode === 'multi-line'"
       :timeout="timeout"
-      :vertical="mode === 'vertical'">
+      :vertical="mode === 'vertical'"
+      :bottom="y"
+      :right="x">
       {{snackbarTitle}}
       <v-btn
         dark
@@ -50,9 +51,11 @@ export default {
     return {
       snackbar: false,
       snackbarTitle: '',
-      color: '',
+      color: null,
       mode: '',
-      timeout: 6000,
+      timeout: 3000,
+      y: 'bottom',
+      x: 'right',
       year: new Date().getFullYear(),
       drawer: true
     }
