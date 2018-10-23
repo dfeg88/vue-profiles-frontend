@@ -1,7 +1,7 @@
 <template>
   <v-layout row wrap>
-    <v-container v-if="profiles.length === 0 && !loading" justify-center>
-      <v-flex xs12 md8 align-center>
+    <v-container justify-center>
+      <v-flex xs12 md8 align-center v-if="!profiles.length">
         <strong>It seems as though no profiles exist...</strong><br><br>
         <v-btn
           color="success"
@@ -9,35 +9,35 @@
         Create Profile
         </v-btn>
       </v-flex>
+      <v-flex
+        xs12 sm6 md4 lg3
+        pa-2
+        v-for="(profile, i) in profiles"
+        :key="i">
+        <v-card :class="{'ma-3': $vuetify.breakpoint.smAndDown, 'ma-3': $vuetify.breakpoint.mdAndUp}" class="elevation-8">
+          <v-img
+            :src="tempImageUrl"
+            gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
+            height="200px">
+            <v-container
+              fill-height
+              fluid
+              pa-2>
+              <v-layout fill-height>
+                <v-flex xs12 align-end flexbox>
+                  <span class="headline white--text" v-text="profile.customer.firstName + ' ' + profile.customer.lastName"></span>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-img>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <delete-profile :profile=profile :profiles=profiles></delete-profile>
+            <edit-profile :profile=profile></edit-profile>
+          </v-card-actions>
+        </v-card>
+      </v-flex>
     </v-container>
-    <v-flex
-      xs12 sm6 md4 lg3
-      pa-2
-      v-for="(profile, i) in profiles"
-      :key="i">
-      <v-card :class="{'ma-3': $vuetify.breakpoint.smAndDown, 'ma-3': $vuetify.breakpoint.mdAndUp}" class="elevation-8">
-        <v-img
-          :src="tempImageUrl"
-          gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
-          height="200px">
-          <v-container
-            fill-height
-            fluid
-            pa-2>
-            <v-layout fill-height>
-              <v-flex xs12 align-end flexbox>
-                <span class="headline white--text" v-text="profile.customer.firstName + ' ' + profile.customer.lastName"></span>
-              </v-flex>
-            </v-layout>
-          </v-container>
-        </v-img>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <delete-profile :profile=profile :profiles=profiles></delete-profile>
-          <edit-profile :profile=profile></edit-profile>
-        </v-card-actions>
-      </v-card>
-    </v-flex>
   </v-layout>
 </template>
 

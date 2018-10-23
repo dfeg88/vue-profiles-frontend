@@ -42,13 +42,13 @@
                 <strong>Car Details:</strong>
               </v-flex>
               <v-flex xs12 sm6 md6>
+                <v-text-field label="Car Reg" v-model="profile.car.registrationNumber"></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm6 md6>
                 <v-text-field label="Car Make" v-model="profile.car.make"></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md6>
                 <v-text-field label="Car Model" v-model="profile.car.model"></v-text-field>
-              </v-flex>
-              <v-flex xs12 sm6 md6>
-                <v-text-field label="Car Reg" v-model="profile.car.registrationNumber"></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md6>
                 <v-text-field label="Engine Size" v-model="profile.car.engineSize"></v-text-field>
