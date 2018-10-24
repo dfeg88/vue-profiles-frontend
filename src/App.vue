@@ -22,7 +22,19 @@
     </v-toolbar>
     <v-content>
       <router-view></router-view>
+      <v-btn
+        color="green"
+        dark
+        absolute
+        bottom
+        right
+        fab
+        class="mb-5"
+        :to="{name: 'create'}">
+        <v-icon>add</v-icon>
+      </v-btn>
     </v-content>
+    
     <v-footer app>
       <span>&copy; {{year}}</span>
     </v-footer>
@@ -32,8 +44,8 @@
       :timeout="timeout"
       :vertical="mode === 'vertical'"
       :bottom="y"
-      :right="x">
-      {{snackbarTitle}}
+      :left="x">
+      {{snackbarText}}
       <v-btn
         dark
         flat
@@ -50,20 +62,20 @@ export default {
   data () {
     return {
       snackbar: false,
-      snackbarTitle: '',
+      snackbarText: '',
       color: null,
       mode: '',
       timeout: 3000,
       y: 'bottom',
-      x: 'right',
+      x: 'left',
       year: new Date().getFullYear(),
       drawer: true
     }
   },
   mounted() {
-    this.$root.$on('initSnackBar', (obj) => {
-      this.snackbarTitle = obj.text;
-      this.color = obj.color
+    this.$root.$on('initSnackBar', (data) => {
+      this.snackbarText = data.text;
+      this.color = data.color
       this.snackbar = true;
     });
   }

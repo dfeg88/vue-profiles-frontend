@@ -15,43 +15,43 @@
                 <strong>Name:</strong>
               </v-flex>
               <v-flex xs12 sm6 md6>
-                <v-text-field label="First name" required v-model="profile.customer.firstName"></v-text-field>
+                <v-text-field :rules="rule" label="First name" required v-model="profile.customer.firstName"></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md6>
-                <v-text-field label="Last Name" v-model="profile.customer.lastName"></v-text-field>
+                <v-text-field :rules="rule" label="Last Name" v-model="profile.customer.lastName"></v-text-field>
               </v-flex>
               <v-flex xs12>
                 <strong>Address:</strong>
               </v-flex>
               <v-flex xs12 sm3 md3>
-                <v-text-field label="House No." v-model="profile.address.houseNumber"></v-text-field>
+                <v-text-field :rules="rule" label="House No." v-model="profile.address.houseNumber"></v-text-field>
               </v-flex>
               <v-flex xs12 sm9 md9>
-                <v-text-field label="Street" v-model="profile.address.street"></v-text-field>
+                <v-text-field :rules="rule" label="Street" v-model="profile.address.street"></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md6>
-                <v-text-field label="Town" v-model="profile.address.town"></v-text-field>
+                <v-text-field :rules="rule" label="Town" v-model="profile.address.town"></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md6>
-                <v-text-field label="City" v-model="profile.address.city"></v-text-field>
+                <v-text-field :rules="rule" label="City" v-model="profile.address.city"></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md6>
-                <v-text-field label="Postcode" v-model="profile.address.postcode"></v-text-field>
+                <v-text-field :rules="rule" label="Postcode" v-model="profile.address.postcode"></v-text-field>
               </v-flex>
               <v-flex xs12>
                 <strong>Car Details:</strong>
               </v-flex>
               <v-flex xs12 sm6 md6>
-                <v-text-field label="Car Reg" v-model="profile.car.registrationNumber"></v-text-field>
+                <v-text-field :rules="rule" label="Car Reg" v-model="profile.car.registrationNumber"></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md6>
-                <v-text-field label="Car Make" v-model="profile.car.make"></v-text-field>
+                <v-text-field :rules="rule" label="Car Make" v-model="profile.car.make"></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md6>
-                <v-text-field label="Car Model" v-model="profile.car.model"></v-text-field>
+                <v-text-field :rules="rule" label="Car Model" v-model="profile.car.model"></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md6>
-                <v-text-field label="Engine Size" v-model="profile.car.engineSize"></v-text-field>
+                <v-text-field type="number" :rules="rule" label="Engine Size" v-model="profile.car.engineSize"></v-text-field>
               </v-flex>
             </v-layout>
           </v-container>
@@ -76,6 +76,7 @@ export default {
     return {
       loading: true,
       dialog: {},
+      rule: [v => !!v || "Field required"]
     }
   },
   methods: {
