@@ -12,7 +12,7 @@
       xs12 sm6 md4 lg3
       v-for="(profile, i) in profiles"
       :key="i">
-      <v-card :class="{'ma-3': $vuetify.breakpoint.smAndDown, 'ma-3': $vuetify.breakpoint.mdAndUp}" class="elevation-8">
+      <v-card :class="{'ma-3': $vuetify.breakpoint.smAndDown, 'ma-3': $vuetify.breakpoint.mdAndUp}" class="elevation-8 mb-2">
         <v-img
           :src="tempImageUrl"
           gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
@@ -49,8 +49,13 @@ export default {
     };
   },
   async mounted() {
-    this.profiles = (await ProfileService.getAll()).data;
-    this.loading = false;
+    try {
+      this.profiles = (await ProfileService.getAll()).data;
+      this.loading = false;
+    } catch (err) {
+      console.warn(err);
+      this.loading = false;
+    }
   }
 };
 </script>

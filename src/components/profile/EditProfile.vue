@@ -58,8 +58,17 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" flat @click.stop="$set(dialog, profile.id, false)">Close</v-btn>
-          <v-btn color="blue darken-1" flat @click.stop="$set(dialog, profile.id, false)" @click="update(profile)">Save</v-btn>
+          <v-btn color="red darken-1" 
+            flat 
+            @click.stop="$set(dialog, profile.id, false)">
+              Close
+          </v-btn>
+          <v-btn color="blue darken-1" 
+            flat 
+            @click.stop="$set(dialog, profile.id, false)" 
+            @click="update(profile)">
+              Save
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

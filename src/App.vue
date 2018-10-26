@@ -29,7 +29,7 @@
         bottom
         right
         fab
-        class="mb-5"
+        class="mb-5 hidden-xs-only"
         :to="{name: 'create'}">
         <v-icon>add</v-icon>
       </v-btn>
@@ -78,6 +78,7 @@ export default {
       this.color = data.color
       this.snackbar = true;
     });
+    console.log(process.env)
   }
 }
 </script>
