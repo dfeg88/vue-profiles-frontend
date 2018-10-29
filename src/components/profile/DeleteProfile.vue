@@ -1,5 +1,5 @@
 <template>
-    <v-dialog v-model="dialog[profile.id]" max-width="500px" transition="dialog-bottom-transition" :key="profile.id">
+    <v-dialog v-model="dialog[profile.id]" max-width="500px" transition="slide-y-transition" :key="profile.id">
       <v-btn icon slot="activator">
         <v-icon color="red darken-4">delete</v-icon>
       </v-btn>
