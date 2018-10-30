@@ -11,7 +11,7 @@
         <v-card-text>
           <v-container grid-list-md>
             <v-layout>
-              <h5>Are you sure you want to delete {{profile.customer.firstName}} {{profile.customer.lastName}}?</h5>
+              <p>Are you sure you want to delete <strong>{{profile.customer.firstName}} {{profile.customer.lastName}}?</strong></p>
             </v-layout>
           </v-container>
         </v-card-text>
