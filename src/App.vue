@@ -78,7 +78,6 @@ export default {
       this.color = data.color
       this.snackbar = true;
     });
-    console.log(process.env)
   }
 }
 </script>

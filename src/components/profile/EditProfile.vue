@@ -1,5 +1,5 @@
 <template>
-    <v-dialog v-model="dialog[profile.id]" max-width="500px" transition="dialog-bottom-transition" :key="profile.id">
+    <v-dialog v-if="profile" v-model="dialog[profile.id]" max-width="500px" transition="dialog-bottom-transition" :key="profile.id">
       <v-btn icon slot="activator">
         <v-icon color="primary">edit</v-icon>
       </v-btn>
@@ -60,10 +60,11 @@
           <v-spacer></v-spacer>
           <v-btn color="red darken-1" 
             flat 
-            @click.stop="$set(dialog, profile.id, false)">
+            @click.stop="$set(dialog, profile.id, false)"
+            @click="cancel">
               Close
           </v-btn>
-          <v-btn color="blue darken-1" 
+          <v-btn color="green darken-1" 
             flat 
             @click.stop="$set(dialog, profile.id, false)" 
             @click="update(profile)">
@@ -79,13 +80,23 @@ import ProfileService from "@/services/ProfileService";
 
 export default {
   props: [
-    'profile'
+    'profileId',
   ],
   data() {
     return {
+      profile: null,
+      originalProfile: null,
       loading: true,
       dialog: {},
       rule: [v => !!v || "Field required"]
+    }
+  },
+  async mounted() {
+    try {
+      this.profile = (await ProfileService.get(this.profileId)).data
+      this.originalProfile = _.cloneDeep(this.profile)
+    } catch (err) {
+      console.log(err)
     }
   },
   methods: {
@@ -105,6 +116,9 @@ export default {
         
         console.log(err)
       }
+    },
+    cancel() {
+      this.profile = _.cloneDeep(this.originalProfile)
     }
   }
 }

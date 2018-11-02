@@ -3,6 +3,7 @@ import Vue from "vue";
 import VeeValidate from 'vee-validate';
 import './plugins/vuetify'
 import Vuetify from 'vuetify'
+import _ from 'lodash'
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";

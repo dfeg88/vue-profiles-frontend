@@ -31,7 +31,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <delete-profile :profile=profile :profiles=profiles></delete-profile>
-          <edit-profile :profile=profile></edit-profile>
+          <edit-profile :profileId=profile.id :profile=profile></edit-profile>
         </v-card-actions>
       </v-card>
     </v-flex>
@@ -45,7 +45,7 @@ export default {
     return {
       loading: true,
       profiles: [],
-      tempImageUrl: "https://iphonewalls.net/wp-content/uploads/2015/01/Cute%20Santa%20Claus%20Minimal%20Illustration%20iPhone%206%20Plus%20HD%20Wallpaper-320x480.jpg"
+      tempImageUrl: "https://d18uhd91svii7m.cloudfront.net/wp-content/uploads/2018/10/25124000/halloween2.jpg"
     };
   },
   async mounted() {
@@ -53,7 +53,7 @@ export default {
       this.profiles = (await ProfileService.getAll()).data;
       this.loading = false;
     } catch (err) {
-      console.warn(err);
+      console.info(err);
       this.loading = false;
     }
   }
