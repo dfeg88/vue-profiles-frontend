@@ -108,6 +108,8 @@ export default {
           text: 'Profile Updated',
           color: 'info'
         })
+
+        this.$root.$emit('updateName', profile)
       } catch (err) {
         this.$root.$emit('initSnackBar', {
           text: 'Something went wrong',

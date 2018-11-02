@@ -9,6 +9,7 @@
       </v-btn>
     </v-flex>
     <v-flex
+      v-if="profiles"
       xs12 sm6 md4 lg3
       v-for="(profile, i) in profiles"
       :key="i">
@@ -23,7 +24,7 @@
             pa-2>
             <v-layout fill-height>
               <v-flex xs12 align-end flexbox>
-                <span class="headline white--text" v-text="profile.customer.firstName + ' ' + profile.customer.lastName"></span>
+                <span class="headline white--text" v-text="displayName || profile.customer.firstName + ' ' + profile.customer.lastName"></span>
               </v-flex>
             </v-layout>
           </v-container>
@@ -43,18 +44,28 @@ import ProfileService from "@/services/ProfileService";
 export default {
   data() {
     return {
+      displayName: '',
       loading: true,
       profiles: [],
       tempImageUrl: "https://d18uhd91svii7m.cloudfront.net/wp-content/uploads/2018/10/25124000/halloween2.jpg"
     };
   },
   async mounted() {
+    this.$root.$on('updateName', (profile) => {
+      this.getDisplayName(profile);
+    })
+
     try {
       this.profiles = (await ProfileService.getAll()).data;
       this.loading = false;
     } catch (err) {
       console.info(err);
       this.loading = false;
+    }
+  },
+  methods: {
+    getDisplayName(profile) {
+      this.displayName = `${profile.customer.firstName} ${profile.customer.lastName}`
     }
   }
 };
